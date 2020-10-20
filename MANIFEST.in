@@ -1,0 +1,5 @@
+include *.yaml
+include *.txt
+include .coveragerc
+include tox.ini
+recursive-include tests *.py
