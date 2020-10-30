@@ -1,23 +1,24 @@
 # -*- coding: utf-8 -*-
 import json
+from typing import Any
 
-from redisorm.fields import is_valid_field
+from redisorm.fields import isormfield
 
 
 class _ORMMeta(type):
     """Metaclass for redis-orm"""
 
-    def __new__(mcs, name, bases, namespace):
+    def __new__(mcs, name: str, bases: tuple, namespace: dict):
         """Metaclass magic method
 
-        Gathers all instances of _Field into a new class variable called _fields. All field instances are also removed
-        from the class dictionary.
+        Gathers all instances of `_FieldBase` into a new class variable called `fields`. All field instances are also
+        removed from the class dictionary.
 
         :param name: name of the class
         :param bases: tuple of base classes
         :param namespace: dictionary of all fields
         """
-        fields = {_name: _field for _name, _field in namespace.items() if is_valid_field(_field)}
+        fields = {_name: _field for _name, _field in namespace.items() if isormfield(_field)}
         c_namespace = namespace.copy()
         for _name in fields.keys():
             del c_namespace[_name]
@@ -31,7 +32,10 @@ class _ORMBase(metaclass=_ORMMeta):
     def __init__(self, from_dict: dict = None):
         """Base method for crating an orm object
 
-        :param from_dict: dictionary object containing field values
+        :param from_dict: dictionary object containing field values, default `None`
+        :raises:
+            :RuntimeError: when `from_dict` parameter is not an instance of `dict`
+            :AttributeError: for unexpected field or value in `from_dict`
         """
         for name, field in self.fields.items():
             setattr(self, name, field.default_value)
@@ -42,8 +46,14 @@ class _ORMBase(metaclass=_ORMMeta):
             for field, value in from_dict.items():
                 setattr(self, field, value)
 
-    def __setattr__(self, key, value):
-        """Magic method setter"""
+    def __setattr__(self, key: str, value: Any):
+        """Magic method setter
+
+        :param key: attribute name
+        :param value: attribute value
+        :returns: nothing
+        :raises: :AttributeError: for unexpected field or value
+        """
         if key in self.fields:
             if self.fields[key].validate(value):
                 super().__setattr__(key, value)
