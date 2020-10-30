@@ -9,6 +9,8 @@ import sys
 
 import sphinx_rtd_theme
 
+from redisorm.version import __version__
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -22,8 +24,8 @@ sys.path.insert(0, os.path.abspath(".."))
 project = "redis-light"
 copyright = "2020, Zobayer Hasan"
 author = "Zobayer Hasan"
-version = "0.1.0.dev4+g81948b9.d20201030"
-release = "0.1.0.dev"
+version = __version__
+release = version.split("+")[0]
 
 # -- General configuration ---------------------------------------------------
 
