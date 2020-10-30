@@ -3,3 +3,7 @@ include *.txt
 include .coveragerc
 include tox.ini
 recursive-include tests *.py
+recursive-include docs *.bat
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs Makefile

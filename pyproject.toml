@@ -23,5 +23,6 @@ exclude = '''
   | \.venv
   | build
   | dist
+  | docs
 )/
 '''
