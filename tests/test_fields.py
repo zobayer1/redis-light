@@ -2,19 +2,6 @@
 from datetime import datetime
 
 from redisorm.fields import IntField, BoolField, FloatField, StringField, DateField
-from redisorm.fields.field import Field
-
-
-def test_required_field_cannot_validate_none():
-    """Test fails if a required field can validate None"""
-    field = Field(required=True)
-    assert not field.validate(None)
-
-
-def test_non_required_field_can_validate_none():
-    """Test fails if a non-required field cannot validate None"""
-    field = Field()
-    assert field.validate(None)
 
 
 def test_int_field_default_value():
