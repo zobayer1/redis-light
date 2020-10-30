@@ -9,7 +9,7 @@ import sys
 
 import sphinx_rtd_theme
 
-from redisorm.version import __version__
+from redisorm import version as _version
 
 # -- Path setup --------------------------------------------------------------
 
@@ -21,10 +21,10 @@ sys.path.insert(0, os.path.abspath(".."))
 
 # -- Project information -----------------------------------------------------
 
-project = "redis-light"
+project = "Redis Light ORM"
 copyright = "2020, Zobayer Hasan"
 author = "Zobayer Hasan"
-version = __version__
+version = _version
 release = version.split("+")[0]
 
 # -- General configuration ---------------------------------------------------
