@@ -3,12 +3,9 @@ requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
-write_to = "redisorm/version.py"
+write_to = "version.py"
 write_to_template = "# -*- coding: utf-8 -*-\n\n__version__ = '{version}'\n"
 version_scheme = "release-branch-semver"
-
-[tool.check-manifest]
-ignore = ["redisorm/version.py"]
 
 [tool.black]
 line-length = 120

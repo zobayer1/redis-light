@@ -146,4 +146,4 @@ cython_debug/
 .vscode/
 
 # Project specific
-redisorm/version.py
+version.py
